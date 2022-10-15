@@ -1,5 +1,7 @@
 package com.example.gdsci2it.screens
 
+import android.app.Activity
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -22,9 +24,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.gdsci2it.MainActivity
+import com.example.gdsci2it.MainActivity2
 import com.example.gdsci2it.R
 @Composable
-fun Onboarding() {
+fun Onboarding(context:Activity) {
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(24.dp),
@@ -37,12 +41,15 @@ fun Onboarding() {
             ), contentScale = ContentScale.FillBounds)
         Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Text(text = "For the Students", fontWeight = FontWeight.ExtraBold, fontSize = 26.sp)
-            Text(text = "By the Students", fontWeight = FontWeight.ExtraBold, fontSize = 24.sp, color = MaterialTheme.colors.primary)
+            Text(text = "By the Students", fontWeight = FontWeight.ExtraBold, fontSize = 24.sp, color = MaterialTheme.colors.secondary)
         }
 
         Text(text = "One stop resource for students' need", fontSize = 20.sp,
             modifier = Modifier.padding(horizontal = 6.dp), fontStyle = FontStyle.Italic, textAlign = TextAlign.Center)
-        IconButton(onClick = { }, modifier = Modifier
+        IconButton(onClick = {
+                     val intent= Intent(context, MainActivity2::class.java)
+            context.startActivity(intent)
+        }, modifier = Modifier
             .clip(CircleShape)
             .background(
                 MaterialTheme.colors.primary

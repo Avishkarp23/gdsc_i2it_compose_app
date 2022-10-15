@@ -1,9 +1,12 @@
 package com.example.gdsci2it.screens
 
+import android.app.Activity
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -28,10 +31,12 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.gdsci2it.MainActivity2
+import com.example.gdsci2it.MainActivity3
 import com.example.gdsci2it.R
 
 @Composable
-fun Login(){
+fun Login(context: Activity){
     var username by remember{
         mutableStateOf("")
     }
@@ -46,7 +51,7 @@ fun Login(){
             .fillMaxSize()
             .padding(28.dp)
             .alpha(0.3f)
-            .clip(CutCornerShape(15.dp))
+            .clip(RoundedCornerShape(15.dp))
             .background(MaterialTheme.colors.background)) {
 
         }
@@ -68,7 +73,7 @@ fun Login(){
 
             })
             Spacer(modifier = Modifier.height(40.dp))
-            LoginFooter( onsigninClick = {
+            LoginFooter(context, onsigninClick = {
 
             },
             onSignupClick = {
@@ -115,13 +120,14 @@ leadingicon = {Icon(imageVector = Icons.Default.Email, contentDescription ="Emai
     }
 }
 @Composable
-fun LoginFooter(
+fun LoginFooter(context:Activity,
     onsigninClick: ()->Unit,
     onSignupClick: ()->Unit
 ){
 
 
-Button(onClick = onsigninClick, modifier = Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.medium) {
+Button(onClick = {                   val intent= Intent(context, MainActivity3::class.java)
+    context.startActivity(intent)}, modifier = Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.large) {
     Text(text = "Sign In")
 }
 TextButton(onClick = onSignupClick) {
@@ -144,9 +150,4 @@ fun demofield(value:String,Onvaluechange:(String)->Unit,label:String,placeholder
         leadingIcon = leadingicon
     
     )
-}
-@Preview
-@Composable
-fun preview(){
-    Login()
 }
